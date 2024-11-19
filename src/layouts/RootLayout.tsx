@@ -1,16 +1,40 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { styled, AppBar, Toolbar, List, ListItem } from "@mui/material";
+import {
+  styled,
+  AppBar,
+  Toolbar,
+  List,
+  ListItem,
+  BottomNavigation,
+  BottomNavigationAction,
+  Paper,
+} from "@mui/material";
+import { Swipe, Home } from "@mui/icons-material";
 import theme from "@/theme";
-import { FC } from "react";
+import { FC, useState } from "react";
 
 const RootContainer = styled("div")({
-  minHeight: "100vh",
+  height: "100vh",
+  maxHeight: "100vh",
   display: "flex",
   flexDirection: "column",
 });
 
 const StyledAppBar = styled(AppBar)({
   boxShadow: "none",
+  [theme.breakpoints.down("md")]: {
+    display: "none",
+  },
+});
+
+const StyledPaper = styled(Paper)({
+  position: "fixed",
+  bottom: 0,
+  left: 0,
+  right: 0,
+  [theme.breakpoints.up("md")]: {
+    display: "none",
+  },
 });
 
 const MainWrapper = styled("main")({
@@ -18,6 +42,15 @@ const MainWrapper = styled("main")({
   flexDirection: "column",
   padding: theme.spacing(2),
   gap: theme.spacing(2),
+  flexGrow: 1,
+  overflowY: "auto",
+  [theme.breakpoints.up("md")]: {
+    paddingTop: theme.spacing(11),
+    maxHeight: "100vh",
+  },
+  [theme.breakpoints.down("md")]: {
+    maxHeight: "calc(100vh - 56px)",
+  },
 });
 
 const NavigationList = styled(List)({
@@ -38,13 +71,13 @@ const NavigationLink = styled(NavLink)({
 });
 
 const navigationLinks = [
-  { to: "/", text: "Home" },
-  { to: "recommendations", text: "Recommendations" },
+  { to: "/", text: "Home", icon: <Home /> },
+  { to: "recommendations", text: "Recommendations", icon: <Swipe /> },
 ];
 
 const AppNavigation: FC = () => {
   return (
-    <StyledAppBar position="static">
+    <StyledAppBar position="fixed">
       <Toolbar>
         <nav>
           <NavigationList>
@@ -71,6 +104,30 @@ const AppNavigation: FC = () => {
   );
 };
 
+const MobileAppNavigation: FC = () => {
+  const [activeLink, setActiveLink] = useState<string>("/");
+  const handleChange = (_event: unknown, newValue: string) => {
+    setActiveLink(newValue);
+  };
+  return (
+    <StyledPaper elevation={3}>
+      <BottomNavigation value={activeLink} onChange={handleChange}>
+        {navigationLinks.map((link) => (
+          <BottomNavigationAction
+            key={link.to}
+            label={link.text}
+            icon={link.icon}
+            value={link.to}
+            component={NavigationLink}
+            to={link.to}
+            viewTransition
+          />
+        ))}
+      </BottomNavigation>
+    </StyledPaper>
+  );
+};
+
 const RootLayout: FC = () => {
   return (
     <RootContainer>
@@ -78,6 +135,7 @@ const RootLayout: FC = () => {
       <MainWrapper>
         <Outlet />
       </MainWrapper>
+      <MobileAppNavigation />
     </RootContainer>
   );
 };
