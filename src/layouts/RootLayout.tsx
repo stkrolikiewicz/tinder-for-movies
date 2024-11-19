@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import {
   styled,
   AppBar,
@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { Swipe, Home } from "@mui/icons-material";
 import theme from "@/theme";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 const RootContainer = styled("div")({
   height: "100vh",
@@ -72,7 +72,7 @@ const NavigationLink = styled(NavLink)({
 
 const navigationLinks = [
   { to: "/", text: "Home", icon: <Home /> },
-  { to: "recommendations", text: "Recommendations", icon: <Swipe /> },
+  { to: "/recommendations", text: "Recommendations", icon: <Swipe /> },
 ];
 
 const AppNavigation: FC = () => {
@@ -109,6 +109,11 @@ const MobileAppNavigation: FC = () => {
   const handleChange = (_event: unknown, newValue: string) => {
     setActiveLink(newValue);
   };
+  const { pathname } = useLocation();
+  useEffect(() => {
+    setActiveLink(pathname);
+  }, [pathname]);
+
   return (
     <StyledPaper elevation={3}>
       <BottomNavigation value={activeLink} onChange={handleChange}>
