@@ -1,22 +1,37 @@
 import type { FC } from "react";
 import { Typography } from "@mui/material";
-
-/*
-TODO:
-- fetch recommendations from the server (GET /recommendations)
-- create context for recommendations to decouple the data fetching from the components
-- create movie card component
-- display recommendations as swipeable cards carousel (like Tinder)
-- add accept/reject buttons (PUT /recommendations/:id/accept, PUT /recommendations/:id/reject)
-- add swipe left/right functionality (PUT /recommendations/:id/reject)
-- add loading sceleton
-- add error handling
-- add empty state
-- write tests for data fetching
-*/
+import { useRecommentations } from "@/context/RecommendationsContext";
 
 const RecommendationsPage: FC = () => {
-  return <Typography variant="h1">Recommendations Page</Typography>;
+  const { recommendations, isLoading, error } = useRecommentations();
+
+  if (isLoading) {
+    return <Typography variant="h3">Loading...</Typography>; // TODO: add skeleton loader or spinner
+  }
+
+  if (error) {
+    return <Typography variant="h3">{error.message}</Typography>; // TODO: add error component
+  }
+
+  if (!recommendations.length) {
+    return <Typography variant="h3">No recommendations found</Typography>; // TODO: add empty state
+  }
+
+  return (
+    <div>
+      {/* TODO: Add container component */}
+      <Typography variant="h3">Recommendations</Typography>
+      {/* TODO: movies carousel carousel */}
+      <div>
+        {recommendations.map((recommendation) => (
+          /* TODO: Add movie card component */
+          <div key={recommendation.id}>
+            <Typography variant="h2">{recommendation.title}</Typography>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default RecommendationsPage;
