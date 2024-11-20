@@ -1,21 +1,22 @@
 import type { FC } from "react";
 import { Typography } from "@mui/material";
-import { useRecommentations } from "@/context/RecommendationsContext";
+// import { useRecommentations } from "@/context/RecommendationsContext";
+import { recommendations } from "@/mock/recommendations";
 
 const RecommendationsPage: FC = () => {
-  const { recommendations, isLoading, error } = useRecommentations();
+  // const { recommendations, isLoading, error } = useRecommentations();
 
-  if (isLoading) {
-    return <Typography variant="h3">Loading...</Typography>; // TODO: add skeleton loader or spinner
-  }
+  // if (isLoading) {
+  //   return <Typography variant="h3">Loading...</Typography>; // TODO: add skeleton loader or spinner
+  // }
 
-  if (error) {
-    return <Typography variant="h3">{error.message}</Typography>; // TODO: add error component
-  }
+  // if (error) {
+  //   return <Typography variant="h3">{error.message}</Typography>; // TODO: add error component
+  // }
 
-  if (!recommendations.length) {
-    return <Typography variant="h3">No recommendations found</Typography>; // TODO: add empty state
-  }
+  // if (!recommendations.length) {
+  //   return <Typography variant="h3">No recommendations found</Typography>; // TODO: add empty state
+  // }
 
   return (
     <div>
