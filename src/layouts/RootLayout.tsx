@@ -12,6 +12,7 @@ import {
 import { Swipe, Home } from "@mui/icons-material";
 import theme from "@/theme";
 import { FC, useEffect, useState } from "react";
+import { RecommendationsProvider } from "@/context/RecommendationsContext";
 
 const RootContainer = styled("div")({
   height: "100vh",
@@ -135,13 +136,15 @@ const MobileAppNavigation: FC = () => {
 
 const RootLayout: FC = () => {
   return (
-    <RootContainer>
-      <AppNavigation />
-      <MainWrapper>
-        <Outlet />
-      </MainWrapper>
-      <MobileAppNavigation />
-    </RootContainer>
+    <RecommendationsProvider>
+      <RootContainer>
+        <AppNavigation />
+        <MainWrapper>
+          <Outlet />
+        </MainWrapper>
+        <MobileAppNavigation />
+      </RootContainer>
+    </RecommendationsProvider>
   );
 };
 
