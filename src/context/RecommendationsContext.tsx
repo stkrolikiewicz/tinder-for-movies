@@ -66,7 +66,7 @@ export const RecommendationsProvider = ({
 
   const moveToNextRecommendation = useCallback(() => {
     setCurrentIndex((prevIndex) => {
-      if (prevIndex >= recommendations.length - 1) {
+      if (prevIndex >= recommendations.length - 2) {
         fetchRecommendations();
         return 0;
       }

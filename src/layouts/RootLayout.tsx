@@ -23,6 +23,8 @@ const RootContainer = styled("div")({
 
 const StyledAppBar = styled(AppBar)({
   boxShadow: "none",
+  backgroundColor: theme.palette.background.paper,
+  borderBottom: `1px solid ${theme.palette.divider}`,
   [theme.breakpoints.down("md")]: {
     display: "none",
   },
@@ -45,6 +47,7 @@ const MainWrapper = styled("main")({
   gap: theme.spacing(2),
   flexGrow: 1,
   overflowY: "auto",
+  backgroundColor: theme.palette.background.default,
   [theme.breakpoints.up("md")]: {
     paddingTop: theme.spacing(11),
     maxHeight: "100vh",
