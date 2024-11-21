@@ -103,6 +103,13 @@ export const MovieCard: FC<MovieCardProps> = ({ item, onAccept, onReject }) => {
         </motion.div>
       )}
       <StyledMotion
+        drag="x"
+        dragConstraints={{ left: 0, right: 0 }}
+        onDragEnd={(_event, info) => {
+          if (info.offset.x > 100) {
+            handleReject();
+          }
+        }}
         initial={{ opacity: 0, scale: 0.7 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={exit}
@@ -130,6 +137,16 @@ export const MovieCard: FC<MovieCardProps> = ({ item, onAccept, onReject }) => {
           </StyledCardContent>
         </StyledCard>
       </StyledMotion>
+      {/* <motion.div
+        
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+        }}
+      /> */}
       <Container
         maxWidth="sm"
         disableGutters
