@@ -6,54 +6,21 @@ function pxToRem(value: number) {
 
 declare module "@mui/material/styles" {
   interface TypographyVariants {
-    p_bold: React.CSSProperties;
     p: React.CSSProperties;
-    buttonSm: React.CSSProperties;
-    smallText: React.CSSProperties;
   }
 
   interface TypographyVariantsOptions {
-    p_bold?: React.CSSProperties;
     p?: React.CSSProperties;
-    buttonSm?: React.CSSProperties;
-    smallText?: React.CSSProperties;
   }
 }
 
 declare module "@mui/material/Typography" {
   interface TypographyPropsVariantOverrides {
-    p_bold: true;
     p: true;
-    buttonSm: true;
-    smallText: true;
   }
 }
 
 declare module "@mui/material/styles" {
-  interface Palette {
-    custom: {
-      accept: string;
-      reject: string;
-      yellow: {
-        light: string;
-        main: string;
-        dark: string;
-      };
-    };
-  }
-
-  interface PaletteOptions {
-    custom?: {
-      accept?: string;
-      reject?: string;
-      yellow?: {
-        light?: string;
-        main?: string;
-        dark?: string;
-      };
-    };
-  }
-
   interface TypeBackground {
     subtle: string;
   }
@@ -106,15 +73,6 @@ const theme = createTheme({
       selected: "rgba(0, 0, 0, 0.08)",
       disabled: "rgba(0, 0, 0, 0.26)",
       disabledBackground: "rgba(0, 0, 0, 0.12)",
-    },
-    custom: {
-      accept: "#4CAF50",
-      reject: "#D32F2F",
-      yellow: {
-        light: "#FFF3E0",
-        main: "#FFC107",
-        dark: "#FFA000",
-      },
     },
     divider: "rgba(0, 0, 0, 0.12)",
   },
@@ -194,25 +152,6 @@ theme.typography = {
     [theme.breakpoints.up("sm")]: {
       fontSize: pxToRem(20),
     },
-  },
-  button: {
-    fontSize: pxToRem(14),
-    fontWeight: 500,
-    textTransform: "none",
-    [theme.breakpoints.up("sm")]: {
-      fontSize: pxToRem(16),
-    },
-  },
-  buttonSm: {
-    fontSize: pxToRem(14),
-    fontWeight: 500,
-    textTransform: "none",
-  },
-  smallText: {
-    fontSize: pxToRem(14),
-    lineHeight: 1.5,
-    fontWeight: 500,
-    textTransform: "none",
   },
   p: {
     fontSize: pxToRem(16),
