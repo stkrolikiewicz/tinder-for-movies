@@ -47,6 +47,7 @@ const MainWrapper = styled("main")({
   gap: theme.spacing(2),
   flexGrow: 1,
   overflowY: "auto",
+  overflowX: "hidden",
   backgroundColor: theme.palette.background.default,
   [theme.breakpoints.up("md")]: {
     paddingTop: theme.spacing(11),
