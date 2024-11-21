@@ -118,11 +118,10 @@ export const MovieCard: FC<MovieCardProps> = ({ item, onAccept, onReject }) => {
         <StyledCard>
           <CardMedia
             component="img"
-            height="400"
             image={imageError ? "/movie-placeholder.jpg" : item.imageURL}
             onError={handleImageError}
             alt={item.title}
-            sx={{ objectFit: "cover", flex: 1 }}
+            sx={{ height: 300, flex: 1 }}
           />
           <StyledCardContent>
             <Typography gutterBottom variant="h4">
@@ -137,16 +136,6 @@ export const MovieCard: FC<MovieCardProps> = ({ item, onAccept, onReject }) => {
           </StyledCardContent>
         </StyledCard>
       </StyledMotion>
-      {/* <motion.div
-        
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-        }}
-      /> */}
       <Container
         maxWidth="sm"
         disableGutters
