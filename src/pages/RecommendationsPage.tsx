@@ -1,60 +1,49 @@
 import { type FC } from "react";
-import { Typography, Container } from "@mui/material";
 import { useRecommentations } from "@/context/RecommendationsContext";
 // import { recommendations } from "@/mock/recommendations";
-import { MovieCard } from "@/components/recommendations";
-import theme from "@/theme";
+import { MovieCard, EmptyState } from "@/components/recommendations";
 import { AnimatePresence } from "motion/react";
+import { MyContainer, MyLoader, MyError } from "@/components";
 
 const RecommendationsPage: FC = () => {
   const {
     currentRecommendation,
-    // acceptRecommendation,
-    // rejectRecommendation,
+    acceptRecommendation,
+    rejectRecommendation,
+    fetchRecommendations,
     moveToNextRecommendation,
     isLoading,
     error,
   } = useRecommentations();
 
   if (isLoading) {
-    return <Typography variant="h3">Loading...</Typography>; // TODO: add skeleton loader or spinner
+    return <MyLoader size={100} />;
   }
 
   if (error) {
-    return <Typography variant="h3">{error.message}</Typography>; // TODO: add error component
+    return (
+      <MyError
+        message={error.message}
+        onRetry={() => void fetchRecommendations}
+      />
+    );
   }
 
   if (!currentRecommendation) {
-    return <Typography variant="h3">No more recommendationns</Typography>; // TODO: add empty state
+    return <EmptyState />;
   }
 
   const onAccept = () => {
-    // void acceptRecommendation(currentRecommendation.id);
+    void acceptRecommendation(currentRecommendation.id);
     moveToNextRecommendation();
   };
 
   const onReject = () => {
-    // void rejectRecommendation(currentRecommendation.id);
+    void rejectRecommendation(currentRecommendation.id);
     moveToNextRecommendation();
   };
   return (
-    <Container
-      disableGutters
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        flex: 1,
-        gap: 2,
-        position: "relative",
-        [theme.breakpoints.up("sm")]: {
-          maxHeight: "calc(100vh - 64px - 48px)",
-        },
-        [theme.breakpoints.down("sm")]: {
-          maxHeight: "calc(100vh - 56px - 48px)",
-        },
-      }}
-    >
+    <MyContainer>
       <AnimatePresence mode="wait">
         <MovieCard
           key={currentRecommendation.id}
@@ -63,7 +52,7 @@ const RecommendationsPage: FC = () => {
           onReject={onReject}
         />
       </AnimatePresence>
-    </Container>
+    </MyContainer>
   );
 };
 
