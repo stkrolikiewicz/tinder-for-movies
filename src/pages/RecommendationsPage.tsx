@@ -1,6 +1,5 @@
 import { type FC } from "react";
 import { useRecommentations } from "@/context/RecommendationsContext";
-// import { recommendations } from "@/mock/recommendations";
 import { MovieCard, EmptyState } from "@/components/recommendations";
 import { AnimatePresence } from "motion/react";
 import { MyContainer, MyLoader, MyError } from "@/components";
